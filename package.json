@@ -12,7 +12,8 @@
       "@biomejs/biome": "2.5.14",
       "prettier": "3.9.6",
       "turbo": "^2.11.2",
-      "typescript": "7.0.2"
+      "typescript": "7.0.2",
+      "vitest": "5.0.1"
    },
    "packageManager": "pnpm@11.25.0",
    "engines": {
