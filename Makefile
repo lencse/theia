@@ -12,11 +12,10 @@ dev: node_modules
 	$(TURBO) run dev
 
 lint: node_modules
-	$(TURBO) run lint
-	#$(BIN)/prettier --check "**/*.{js,jsx,ts,tsx,json}"
+	$(BIN)/biome check
 
 format: node_modules
-	#$(BIN)/prettier --write "**/*.{js,jsx,ts,tsx,json}"
+	$(BIN)/biome format --write
 
 check-types: node_modules
 	$(TURBO) run check-types
