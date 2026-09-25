@@ -1,5 +1,5 @@
+import { greet } from '@repo/wenger-pkg'
 import { createFileRoute } from '@tanstack/react-router'
-import {greet} from "@repo/wenger-pkg";
 
 export const Route = createFileRoute('/')({ component: App })
 

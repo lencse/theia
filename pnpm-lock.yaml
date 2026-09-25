@@ -243,6 +243,10 @@ importers:
   packages/typescript-config: {}
 
   packages/wenger-pkg:
+    dependencies:
+      js-crypto-random:
+        specifier: ^1.0.5
+        version: 1.0.5
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -1554,6 +1558,12 @@ packages:
   jiti@2.7.0:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
+
+  js-crypto-env@1.0.5:
+    resolution: {integrity: sha512-8/UNN3sG8J+yMzqwSNVaobaWhIz4MqZFoOg5OB0DFXqS8eFjj2YvdmLJqIWXPl57Yw10SvYx0DQOtkfsWIV9Aw==}
+
+  js-crypto-random@1.0.5:
+    resolution: {integrity: sha512-WydEQ5rrWLzgSkX1QNsuGinkv7z57UkYnDGo5f5oGtBe9QeUWUehdmPNNG4a4Sf8xGkjZBOhKaZqT1ACnyYCBA==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3216,6 +3226,12 @@ snapshots:
   isbot@5.2.2: {}
 
   jiti@2.7.0: {}
+
+  js-crypto-env@1.0.5: {}
+
+  js-crypto-random@1.0.5:
+    dependencies:
+      js-crypto-env: 1.0.5
 
   js-tokens@4.0.0: {}
 

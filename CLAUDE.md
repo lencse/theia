@@ -26,7 +26,7 @@ Use the Makefile targets (`make build`, `make dev`, `make lint`, `make format`, 
 
 - Install dependencies in the workspace that uses them (`pnpm add <dep> --filter wenger`). Root devDependencies are only for repo-wide tooling (turbo, Biome, TypeScript, Vitest).
 - Internal packages go in `packages/` and are named `@repo/<name>`. Depend on them with `"@repo/<name>": "workspace:*"`. Import them by package name, never by relative paths into another workspace.
-- A new internal package must expose its entry points via `exports` in its `package.json`. It must also define the scripts (`build`, `check-types`, `test`, ...) that turbo should run for it. Copy the layout of `packages/wenger-pkg`: `tsconfig.json` covers `src` and `test` for type checking, and `tsconfig.build.json` emits only `src` to `dist`. Relative imports need `.js` extensions (NodeNext).
+- A new internal package must expose its entry points via `exports` in its `package.json`. It must also define the scripts (`build`, `check-types`, `test`, ...) that turbo should run for it. Use the `new-package` skill (`.claude/skills/new-package`) to scaffold one. It copies the layout of `packages/wenger-pkg`: `tsconfig.json` covers `src` and `test` for type checking, and `tsconfig.build.json` emits only `src` to `dist`. Relative imports need `.js` extensions (NodeNext).
 
 ## Shared TypeScript config
 
