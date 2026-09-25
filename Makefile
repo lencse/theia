@@ -15,7 +15,7 @@ lint: node_modules
 	$(BIN)/biome check
 
 format: node_modules
-	$(BIN)/biome format --write
+	$(BIN)/biome check --write
 
 check-types: node_modules
 	$(TURBO) run check-types

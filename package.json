@@ -1,13 +1,7 @@
 {
    "name": "theia",
    "private": true,
-   "scripts": {
-      "build": "turbo run build",
-      "dev": "turbo run dev",
-      "lint": "turbo run lint",
-      "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-      "check-types": "turbo run check-types"
-   },
+   "scripts": {},
    "devDependencies": {
       "@biomejs/biome": "2.5.14",
       "prettier": "3.9.6",
@@ -15,7 +9,7 @@
       "typescript": "7.0.2",
       "vitest": "5.0.1"
    },
-   "packageManager": "pnpm@11.25.0",
+   "packageManager": "pnpm@12.5.1",
    "engines": {
       "node": ">=24"
    }
