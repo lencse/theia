@@ -15,14 +15,14 @@
       "check": "biome check"
    },
    "dependencies": {
-      "@tailwindcss/vite": "^4.1.18",
+      "@tailwindcss/vite": "^4.3.3",
       "@tanstack/react-devtools": "latest",
       "@tanstack/react-router": "latest",
       "@tanstack/react-router-devtools": "latest",
       "@tanstack/react-start": "latest",
       "react": "^19.2.0",
       "react-dom": "^19.2.0",
-      "tailwindcss": "^4.1.18",
+      "tailwindcss": "^4.3.3",
       "@repo/wenger-pkg": "workspace:*"
    },
    "devDependencies": {
