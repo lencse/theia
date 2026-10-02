@@ -25,4 +25,7 @@ verify: lint check-types test
 test: node_modules
 	$(TURBO) test
 
+node_modules:
+	pnpm install --frozen-lockfile
+
 .PHONY: dev format test build
