@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { type CharSet, charSets as charSetMap, generatePassword } from '../src/password/password.js'
+import { type CharSet, charSets as charSetMap, generatePassword } from '../src/password/password'
 
 describe('Password Generator', () => {
    test('default length', () => {

@@ -25,12 +25,8 @@ Create exactly these five files, replacing `<name>`. They match `packages/wenger
    "version": "0.0.0",
    "private": true,
    "type": "module",
-   "exports": {
-      ".": {
-         "types": "./dist/index.d.ts",
-         "default": "./dist/index.js"
-      }
-   },
+   "main": "./dist/index.js",
+   "types": "./dist/index.d.ts",
    "scripts": {
       "build": "tsc -p tsconfig.build.json",
       "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
@@ -48,7 +44,11 @@ Create exactly these five files, replacing `<name>`. They match `packages/wenger
 ```json
 {
    "extends": "@repo/typescript-config/base.json",
-   "include": ["src", "test"]
+   "include": ["src", "test"],
+   "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "bundler"
+   }
 }
 ```
 
@@ -77,7 +77,7 @@ export function greet(name: string): string {
 
 ```ts
 import { describe, expect, it } from 'vitest'
-import { greet } from '../src/index.js'
+import { greet } from '../src/index'
 
 describe('greet', () => {
    it('greets by name', () => {
@@ -88,9 +88,9 @@ describe('greet', () => {
 
 Why the details matter:
 
-- **`.js` in relative imports** (`'../src/index.js'`) is required. The base config uses NodeNext resolution, which wants the emitted file's extension even in `.ts` sources.
+- **No extensions in relative imports** (`'../src/index'`). The package's `tsconfig.json` overrides the NodeNext preset with `bundler` resolution. tsc emits the imports unchanged, so `dist` only runs through a bundler (Vite, Vitest), not plain Node.
 - **Two tsconfigs.** `check-types` has to see the tests, but `build` must not emit them into `dist`.
-- **`exports` points at `dist`.** Consumers get the compiled JS and `.d.ts` files. That's why turbo's `build` task has `dependsOn: ["^build"]` and `outputs: ["dist/**"]`, and why each package has a `dev` watcher.
+- **`main` and `types` point at `dist`.** TypeScript, Vite and Node all read the compiled output. That's why turbo's `build` task has `dependsOn: ["^build"]` and `outputs: ["dist/**"]`, and why each package has a `dev` watcher. Consumers see changes, including type changes, only after a build or while the watcher runs.
 - **`--preserveWatchOutput`** stops tsc from clearing the terminal, which would wipe other tasks' logs in turbo's TUI.
 - **No `vitest` or `typescript` devDependencies.** They're root tooling, and their binaries resolve from the root. Add runtime dependencies to this package only (`pnpm add <dep> --filter @repo/<name>`).
 - **Don't add** a `pnpm-lock.yaml`, a `pnpm-workspace.yaml` or a `"pnpm"` field. A nested workspace file makes pnpm treat the dir as its own root and breaks `pnpm run`.
