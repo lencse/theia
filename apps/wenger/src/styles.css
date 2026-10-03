@@ -1,2 +1,61 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+@theme {
+   --color-canvas: #0c1019;
+   --color-canvas-lift: #151b29;
+   --color-ink: #dde2ec;
+
+   --color-magentle-50: #fff4fc;
+   --color-magentle-100: #f8e0f3;
+   --color-magentle-200: #edbae3;
+   --color-magentle-300: #da89cb;
+   --color-magentle-400: #ba47aa;
+   --color-magentle-500: #a11692;
+   --color-magentle-600: #8f0081;
+   --color-magentle-700: #7e0072;
+   --color-magentle-800: #6c0461;
+   --color-magentle-900: #5c1553;
+   --color-magentle-950: #40153a;
+
+   --color-24-carrot-50: #fff5f0;
+   --color-24-carrot-100: #ffeade;
+   --color-24-carrot-200: #ffd3bb;
+   --color-24-carrot-300: #fdb58b;
+   --color-24-carrot-400: #f38d4e;
+   --color-24-carrot-500: #e77728;
+   --color-24-carrot-600: #c45c00;
+   --color-24-carrot-700: #a44c00;
+   --color-24-carrot-800: #853c00;
+   --color-24-carrot-900: #6f3307;
+   --color-24-carrot-950: #421d04;
+
+   --color-upset-tomato-50: #fff5f4;
+   --color-upset-tomato-100: #fde2de;
+   --color-upset-tomato-200: #f7bdb6;
+   --color-upset-tomato-300: #e88e85;
+   --color-upset-tomato-400: #cc4f48;
+   --color-upset-tomato-500: #b42525;
+   --color-upset-tomato-600: #a40010;
+   --color-upset-tomato-700: #8f040f;
+   --color-upset-tomato-800: #780f12;
+   --color-upset-tomato-900: #651a17;
+   --color-upset-tomato-950: #461714;
+}
+
+@layer base {
+   /* The root background paints the whole viewport; min-height keeps the gradient from
+      tiling when the content is shorter than the screen. */
+   html {
+      color-scheme: dark;
+      min-height: 100%;
+      background-color: var(--color-canvas);
+      background-image: radial-gradient(
+         ellipse 140% 90% at 50% 0%,
+         var(--color-canvas-lift) 0%,
+         var(--color-canvas) 70%
+      );
+      background-repeat: no-repeat;
+      color: var(--color-ink);
+   }
+}
