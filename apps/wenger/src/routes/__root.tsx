@@ -1,5 +1,5 @@
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router'
+import { createRootRoute, HeadContent, Link, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import type * as React from 'react'
 import Footer from '../components/Footer'
@@ -30,7 +30,22 @@ export const Route = createRootRoute({
       ],
    }),
    shellComponent: RootDocument,
+   notFoundComponent: NotFound,
 })
+
+function NotFound() {
+   return (
+      <main>
+         <section>
+            <p>404</p>
+            <h1>Page not found.</h1>
+            <p>
+               The page you're looking for doesn't exist. <Link to="/">Go back home</Link>.
+            </p>
+         </section>
+      </main>
+   )
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
    return (
