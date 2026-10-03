@@ -8,7 +8,9 @@ import { defineConfig } from 'vite'
 const config = defineConfig({
    resolve: { tsconfigPaths: true },
    plugins: [
-      devtools(),
+      // Vite already forwards browser errors to the terminal. With TanStack also piping
+      // terminal logs to the browser, a single error echoes back and forth forever.
+      devtools({ consolePiping: { enabled: false } }),
       tailwindcss(),
       tanstackStart(),
       viteReact(),

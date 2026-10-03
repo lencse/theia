@@ -1,12 +1,10 @@
-import { tmpdir } from 'node:os'
 import { createFileRoute } from '@tanstack/react-router'
 import { getTmpDir } from '#/serverActions/getTmpDir.ts'
 
 export const Route = createFileRoute('/')({
    component: App,
    loader: async () => {
-      const tmp = await getTmpDir()
-      return `fn: ${tmpdir()}\nhtttp: ${tmp}`
+      return await getTmpDir()
    },
 })
 
