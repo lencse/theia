@@ -1,4 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import Canvas from '#/components/Canvas.tsx'
+import Sidebar from '#/components/Sidebar.tsx'
 import { getTmpDir } from '#/serverActions/getTmpDir.ts'
 
 export const Route = createFileRoute('/')({
@@ -9,11 +11,12 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-   const tmp = Route.useLoaderData()
    return (
-      <main>
-         <h1>Here be dragons</h1>
-         <pre>{tmp}</pre>
-      </main>
+      <div className="md:flex">
+         <Sidebar />
+         <main className="min-w-0 flex-1">
+            <Canvas />
+         </main>
+      </div>
    )
 }
