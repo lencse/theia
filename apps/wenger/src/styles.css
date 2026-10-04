@@ -1,6 +1,49 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Only the custom theme below is shipped; daisyUI's built-in themes are left out. */
+@plugin "daisyui" {
+   themes: false;
+}
+
+@plugin "daisyui/theme" {
+   name: "wenger";
+   default: true;
+   color-scheme: dark;
+
+   --color-base-100: #0c1019;
+   --color-base-200: #151b29;
+   --color-base-300: #1f2637;
+   --color-base-content: #dde2ec;
+
+   --color-primary: #b42525;
+   --color-primary-content: #fff5f4;
+   --color-secondary: #a11692;
+   --color-secondary-content: #fff4fc;
+   --color-accent: #e77728;
+   --color-accent-content: #421d04;
+   --color-neutral: #252c3d;
+   --color-neutral-content: #dde2ec;
+
+   --color-info: #4ea3e0;
+   --color-info-content: #06233a;
+   --color-success: #3fb27f;
+   --color-success-content: #052e1c;
+   --color-warning: #f2b544;
+   --color-warning-content: #3d2602;
+   --color-error: #e5484d;
+   --color-error-content: #fff5f4;
+
+   --radius-selector: 0.5rem;
+   --radius-field: 0.375rem;
+   --radius-box: 0.75rem;
+   --size-selector: 0.25rem;
+   --size-field: 0.25rem;
+   --border: 1px;
+   --depth: 0;
+   --noise: 0;
+}
+
 @theme {
    --color-canvas: #0c1019;
    --color-canvas-lift: #151b29;
@@ -44,18 +87,17 @@
 }
 
 @layer base {
-   /* The root background paints the whole viewport; min-height keeps the gradient from
-      tiling when the content is shorter than the screen. */
-   html {
-      color-scheme: dark;
+   /* The daisyUI theme sets the page background color, text color and color-scheme; this
+      adds the gradient on top. min-height keeps it from tiling when the content is shorter
+      than the screen. `html:root` outranks daisyUI's `:root` scroll-lock rule, which
+      otherwise resets background-image to none. */
+   html:root {
       min-height: 100%;
-      background-color: var(--color-canvas);
       background-image: radial-gradient(
          ellipse 140% 90% at 50% 0%,
          var(--color-canvas-lift) 0%,
          var(--color-canvas) 70%
       );
       background-repeat: no-repeat;
-      color: var(--color-ink);
    }
 }

@@ -236,6 +236,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.0.1
         version: 6.1.1(vite@8.3.0(@types/node@22.20.4)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.1))
+      daisyui:
+        specifier: ^5.7.47
+        version: 5.7.47
       typescript:
         specifier: ^6.0.2
         version: 6.0.3
@@ -2247,6 +2250,9 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
+  daisyui@5.7.47:
+    resolution: {integrity: sha512-NOl4vPifelRqB3CMzoU751zc44KCDD9HdHMTTqQ30uiYVpIyK7+s94/ySDWgYqjdl1tQCaCrgGBx4KCizm+a3Q==}
 
   data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
@@ -6365,6 +6371,8 @@ snapshots:
       css-tree: 2.2.1
 
   csstype@3.2.3: {}
+
+  daisyui@5.7.47: {}
 
   data-uri-to-buffer@4.0.1: {}
 
