@@ -50,7 +50,7 @@ describe('Password Generator', () => {
          },
          {
             charSets: ['lowerchars', 'symbols'],
-            patterns: [/[a-z]/, /[!@#$ %()\-+[\].^&*]/],
+            patterns: [/[a-z]/, /[!@#$ %()\-+[\].^&*_]/],
          },
          {
             charSets: [],

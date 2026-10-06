@@ -4,7 +4,7 @@ export const charSets = {
    lowerchars: 'abcdefghijklmnopqrstuvwxyz',
    upperchars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
    digits: '0123456789',
-   symbols: '!@#$%^&*()-+[].',
+   symbols: '!@#$%^&*()-+[]._',
 }
 
 export type CharSet = keyof typeof charSets
