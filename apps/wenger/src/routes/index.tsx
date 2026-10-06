@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import Canvas from '#/components/Canvas.tsx'
 import Sidebar from '#/components/Sidebar.tsx'
-import { getTmpDir } from '#/serverActions/getTmpDir.ts'
+import { getTmpDir } from '#/server/getTmpDir.ts'
 
 export const Route = createFileRoute('/')({
    component: App,

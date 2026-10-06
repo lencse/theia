@@ -101,3 +101,19 @@
       background-repeat: no-repeat;
    }
 }
+
+/* Quieter focus state for daisyUI fields than its default 2px near-white outline: the border
+   brightens slightly and a faint ring appears. daisyUI's rules sit in nested layers inside
+   `utilities`, so a rule directly in `utilities` wins; `:where()` keeps specificity low so
+   Tailwind classes on the element still override it. */
+@layer utilities {
+   :where(.input, .textarea, .select):is(:focus, :focus-within) {
+      --input-color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+      outline: none;
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-base-content) 8%, transparent);
+
+      @media (forced-colors: active) {
+         outline: 2px solid CanvasText;
+      }
+   }
+}
