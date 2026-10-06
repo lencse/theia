@@ -4,14 +4,11 @@ import type { Brick, BrickProps } from '#/bricks/bricks'
 
 export const PasswordComponent: React.FC<BrickProps> = ({ onResult }) => {
    const [result, setResult] = useState('')
-   useEffect(() => {
-      if (result !== '') {
-         return
-      }
+   if (result === '') {
       const password = generatePassword()
       setResult(password)
       onResult(password)
-   }, [result, onResult])
+   }
    return <pre>{result}</pre>
 }
 
