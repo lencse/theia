@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router'
 
 export const Route = createFileRoute('/api/b/base64encode')({
    server: {
@@ -17,10 +17,9 @@ export const Route = createFileRoute('/api/b/base64encode')({
                   },
                )
             }
-
             return new Response(
                JSON.stringify({
-                  result: btoa(input),
+                  result: Buffer.from(input, 'utf-8').toString('base64'),
                }),
                {
                   headers: {
