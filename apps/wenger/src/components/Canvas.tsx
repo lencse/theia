@@ -1,19 +1,14 @@
 import { useMemo, useState } from 'react'
 import type { Brick } from '#/bricks/bricks.tsx'
-import { base64decode } from '#/bricks/text/base64decode.tsx'
-import { base64encode } from '#/bricks/text/base64encode.tsx'
-import { text } from '#/bricks/text/text.tsx'
 import { BrickComponent } from '#/components/Brick.tsx'
 
-// Each brick's result becomes the next brick's input
-const defaultChain: Brick[] = [text, base64encode, base64decode]
-
 type CanvasProps = {
-   // Pass a stable (module-level) array: a new array each render resets the handlers
-   chain?: Brick[]
+   // Each brick's result becomes the next brick's input. Pass a stable array:
+   // a new array each render resets the handlers
+   chain: Brick[]
 }
 
-export default function Canvas({ chain = defaultChain }: CanvasProps) {
+export default function Canvas({ chain }: CanvasProps) {
    // One state array instead of useState per brick: hooks can't be called inside a loop
    const [inputs, setInputs] = useState<string[]>(() => chain.map(() => ''))
    // Created once so the handlers keep the same identity across renders; bricks that
