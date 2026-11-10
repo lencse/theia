@@ -1,26 +1,31 @@
 import { useEffect, useRef, useState } from 'react'
-import { type Brick, brickTypes } from '#/bricks/bricks.tsx'
+import { addableBricks, type Brick, chainPath } from '#/bricks/bricks.tsx'
 import { BrickComponent } from '#/components/Brick.tsx'
 
-// Entry bricks only start a chain; the rest can be appended to one
-const addableBricks = brickTypes.filter((b) => !b.isEntry)
-
 type CanvasProps = {
-   // Only read on mount; key the Canvas to start over with a different chain
-   initialChain: Brick[]
+   // Controlled: the owner (the URL) holds the chain and applies the changes
+   chain: Brick[]
+   onChainChange: (chain: Brick[]) => void
 }
 
-// The same brick type can appear more than once, so each placed brick gets its own key
-type ChainItem = { key: number; brick: Brick }
-
-export default function Canvas({ initialChain }: CanvasProps) {
-   const nextKey = useRef(initialChain.length)
-   const [chain, setChain] = useState<ChainItem[]>(() =>
-      initialChain.map((brick, key) => ({ key, brick })),
-   )
+export default function Canvas({ chain, onChainChange }: CanvasProps) {
    // Each brick's result becomes the next brick's input. Results are kept for every brick,
    // including the last, so a newly added brick starts from the current output.
    const [results, setResults] = useState<string[]>([])
+   // When the chain changes (add, delete, back button, edited URL), results from the
+   // first changed position on belong to bricks that are gone. Dropped during render,
+   // not in an effect, so no brick ever gets a stale input.
+   const path = chainPath(chain)
+   const [prevPath, setPrevPath] = useState(path)
+   if (path !== prevPath) {
+      const prevIds = prevPath.split('/')
+      let firstChanged = 0
+      while (firstChanged < chain.length && chain[firstChanged]?.id === prevIds[firstChanged]) {
+         firstChanged++
+      }
+      setPrevPath(path)
+      setResults((prev) => prev.slice(0, firstChanged))
+   }
    // One handler per position, created once so its identity never changes; bricks that
    // list onResult in an effect's dependencies would otherwise re-run on every render
    const handlers = useRef<((result: string) => void)[]>([])
@@ -62,17 +67,21 @@ export default function Canvas({ initialChain }: CanvasProps) {
       }
    }, [menuOpen])
    const addBrick = (brick: Brick) => {
-      setChain((prev) => [...prev, { key: nextKey.current++, brick }])
+      onChainChange([...chain, brick])
       setMenuOpen(false)
    }
+   const deleteLastBrick = () => onChainChange(chain.slice(0, -1))
    return (
       <section className="flex flex-col gap-4 p-6">
-         {chain.map(({ key, brick }, idx) => (
+         {chain.map((brick, idx) => (
             <BrickComponent
-               key={key}
+               // biome-ignore lint/suspicious/noArrayIndexKey: bricks are only appended or removed from the end, so a position keeps its brick; the id makes one swapped in through the URL start fresh
+               key={`${idx}-${brick.id}`}
                brick={brick}
                input={idx === 0 ? '' : (results[idx - 1] ?? '')}
                onResult={handlerFor(idx)}
+               // Entry bricks start the chain, so they can't be removed
+               onDelete={idx === chain.length - 1 && !brick.isEntry ? deleteLastBrick : undefined}
             />
          ))}
          {/* Same width as a brick card so the button sits centered under it */}

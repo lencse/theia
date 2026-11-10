@@ -9,8 +9,8 @@ export default function Sidebar() {
                {entryBricks.map((brick) => (
                   <li key={brick.id}>
                      <Link
-                        to="/b/$brick"
-                        params={{ brick: brick.id }}
+                        to="/b/$"
+                        params={{ _splat: brick.id }}
                         className="btn btn-sm w-full justify-start"
                         activeProps={{ className: 'btn-soft btn-accent' }}
                         inactiveProps={{ className: 'btn-ghost' }}

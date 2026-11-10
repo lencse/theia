@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as BBrickRouteImport } from './routes/b/$brick'
+import { Route as BSplatRouteImport } from './routes/b/$'
 import { Route as ApiBBase64decodeRouteImport } from './routes/api/b/base64decode'
 import { Route as ApiBBase64encodeRouteImport } from './routes/api/b/base64encode'
 
@@ -25,9 +25,9 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BBrickRoute = BBrickRouteImport.update({
-  id: '/b/$brick',
-  path: '/b/$brick',
+const BSplatRoute = BSplatRouteImport.update({
+  id: '/b/$',
+  path: '/b/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiBBase64decodeRoute = ApiBBase64decodeRouteImport.update({
@@ -44,14 +44,14 @@ const ApiBBase64encodeRoute = ApiBBase64encodeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/b/$brick': typeof BBrickRoute
+  '/b/$': typeof BSplatRoute
   '/api/b/base64decode': typeof ApiBBase64decodeRoute
   '/api/b/base64encode': typeof ApiBBase64encodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/b/$brick': typeof BBrickRoute
+  '/b/$': typeof BSplatRoute
   '/api/b/base64decode': typeof ApiBBase64decodeRoute
   '/api/b/base64encode': typeof ApiBBase64encodeRoute
 }
@@ -59,22 +59,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/b/$brick': typeof BBrickRoute
+  '/b/$': typeof BSplatRoute
   '/api/b/base64decode': typeof ApiBBase64decodeRoute
   '/api/b/base64encode': typeof ApiBBase64encodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/b/$brick' | '/api/b/base64decode' | '/api/b/base64encode'
+    '/' | '/about' | '/b/$' | '/api/b/base64decode' | '/api/b/base64encode'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    '/' | '/about' | '/b/$brick' | '/api/b/base64decode' | '/api/b/base64encode'
+  to: '/' | '/about' | '/b/$' | '/api/b/base64decode' | '/api/b/base64encode'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/b/$brick'
+    | '/b/$'
     | '/api/b/base64decode'
     | '/api/b/base64encode'
   fileRoutesById: FileRoutesById
@@ -82,7 +81,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BBrickRoute: typeof BBrickRoute
+  BSplatRoute: typeof BSplatRoute
   ApiBBase64decodeRoute: typeof ApiBBase64decodeRoute
   ApiBBase64encodeRoute: typeof ApiBBase64encodeRoute
 }
@@ -103,11 +102,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/b/$brick': {
-      id: '/b/$brick'
-      path: '/b/$brick'
-      fullPath: '/b/$brick'
-      preLoaderRoute: typeof BBrickRouteImport
+    '/b/$': {
+      id: '/b/$'
+      path: '/b/$'
+      fullPath: '/b/$'
+      preLoaderRoute: typeof BSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/b/base64decode': {
@@ -130,7 +129,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BBrickRoute: BBrickRoute,
+  BSplatRoute: BSplatRoute,
   ApiBBase64decodeRoute: ApiBBase64decodeRoute,
   ApiBBase64encodeRoute: ApiBBase64encodeRoute,
 }
