@@ -6,9 +6,14 @@ import { text } from '#/bricks/text/text.tsx'
 import { BrickComponent } from '#/components/Brick.tsx'
 
 // Each brick's result becomes the next brick's input
-const chain: Brick[] = [text, base64encode, base64decode]
+const defaultChain: Brick[] = [text, base64encode, base64decode]
 
-export default function Canvas() {
+type CanvasProps = {
+   // Pass a stable (module-level) array: a new array each render resets the handlers
+   chain?: Brick[]
+}
+
+export default function Canvas({ chain = defaultChain }: CanvasProps) {
    // One state array instead of useState per brick: hooks can't be called inside a loop
    const [inputs, setInputs] = useState<string[]>(() => chain.map(() => ''))
    // Created once so the handlers keep the same identity across renders; bricks that
@@ -25,7 +30,7 @@ export default function Canvas() {
                   : prev.map((value, i) => (i === idx + 1 ? result : value)),
             )
          }),
-      [],
+      [chain],
    )
    return (
       <section className="flex flex-col gap-4 p-6">
