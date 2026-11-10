@@ -79,6 +79,7 @@ export default function Canvas({ chain, onChainChange }: CanvasProps) {
                key={`${idx}-${brick.id}`}
                brick={brick}
                input={idx === 0 ? '' : (results[idx - 1] ?? '')}
+               result={results[idx] ?? ''}
                onResult={handlerFor(idx)}
                // Entry bricks start the chain, so they can't be removed
                onDelete={idx === chain.length - 1 && !brick.isEntry ? deleteLastBrick : undefined}
