@@ -1,5 +1,4 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { useMemo } from 'react'
 import { brickTypes } from '#/bricks/bricks.tsx'
 import Canvas from '#/components/Canvas.tsx'
 import Sidebar from '#/components/Sidebar.tsx'
@@ -21,14 +20,12 @@ export const Route = createFileRoute('/b/$brick')({
 function BrickPage() {
    const { brick: brickId } = Route.useParams()
    const brick = findEntryBrick(brickId)
-   // Canvas needs a stable chain array (see its props)
-   const chain = useMemo(() => (brick ? [brick] : []), [brick])
    return (
       <div className="md:flex">
          <Sidebar />
          <main className="min-w-0 flex-1">
             {/* Keyed so Canvas state resets when navigating between bricks */}
-            <Canvas key={brickId} chain={chain} />
+            <Canvas key={brickId} initialChain={brick ? [brick] : []} />
          </main>
       </div>
    )
