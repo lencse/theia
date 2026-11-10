@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import { Base64EncodeComponent } from '#/bricks/text/base64encode.tsx'
-import { PasswordComponent } from '#/bricks/text/password.tsx'
-import {TextComponent} from "#/bricks/text/text.tsx";
+import { useMemo, useState } from 'react'
+import type { Brick } from '#/bricks/bricks.tsx'
+import { base64decode } from '#/bricks/text/base64decode.tsx'
+import { base64encode } from '#/bricks/text/base64encode.tsx'
+import { text } from '#/bricks/text/text.tsx'
+import { BrickComponent } from '#/components/Brick.tsx'
+
+// Each brick's result becomes the next brick's input
+const chain: Brick[] = [text, base64encode, base64decode]
 
 export default function Canvas() {
-   const [txt, setTxt] = useState('')
+   // One state array instead of useState per brick: hooks can't be called inside a loop
+   const [inputs, setInputs] = useState<string[]>(() => chain.map(() => ''))
+   // Created once so the handlers keep the same identity across renders; bricks that
+   // list onResult in an effect's dependencies would otherwise re-run on every render
+   const onResults = useMemo(
+      () =>
+         chain.map((_, idx) => (result: string) => {
+            if (idx === chain.length - 1) {
+               return
+            }
+            setInputs((prev) =>
+               prev[idx + 1] === result
+                  ? prev
+                  : prev.map((value, i) => (i === idx + 1 ? result : value)),
+            )
+         }),
+      [],
+   )
    return (
-      <section className="p-6">
-         <div className="card bg-base-100 w-4xl shadow-sm  border border-upset-tomato-900">
-            <div className="card-body">
-               <h2 className="card-title mb-4 ">Text</h2>
-               <TextComponent
-                  input=""
-                  onResult={(result) => {
-                     setTxt(result)
-                  }}
-               />
-               {/*<PasswordComponent*/}
-               {/*   input=""*/}
-               {/*   onResult={(result) => {*/}
-               {/*      setTxt(result)*/}
-               {/*   }}*/}
-               {/*/>*/}
-            </div>
-         </div>
-         <div className="card bg-base-100 w-4xl shadow-sm  border border-upset-tomato-900">
-            <div className="card-body">
-               <h2 className="card-title mb-4 ">Text</h2>
-               <Base64EncodeComponent input={txt} onResult={() => {}} />
-            </div>
-         </div>
+      <section className="flex flex-col gap-4 p-6">
+         {chain.map((brick, idx) => (
+            <BrickComponent
+               key={brick.id}
+               brick={brick}
+               input={inputs[idx] ?? ''}
+               onResult={onResults[idx] ?? (() => {})}
+            />
+         ))}
       </section>
    )
 }
