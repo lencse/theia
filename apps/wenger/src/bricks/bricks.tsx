@@ -16,3 +16,6 @@ export type Brick = {
 }
 
 export const brickTypes = [text, password, base64encode, base64decode]
+
+// Entry bricks start a chain and each gets its own page at /b/$brick
+export const entryBricks = brickTypes.filter((b) => b.isEntry)

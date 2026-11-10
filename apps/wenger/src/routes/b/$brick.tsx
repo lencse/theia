@@ -1,10 +1,9 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { brickTypes } from '#/bricks/bricks.tsx'
+import { entryBricks } from '#/bricks/bricks.tsx'
 import Canvas from '#/components/Canvas.tsx'
 import Sidebar from '#/components/Sidebar.tsx'
 
-// Only entry bricks can start a chain, so only they get a page
-const findEntryBrick = (id: string) => brickTypes.find((b) => b.isEntry && b.id === id)
+const findEntryBrick = (id: string) => entryBricks.find((b) => b.id === id)
 
 export const Route = createFileRoute('/b/$brick')({
    component: BrickPage,
