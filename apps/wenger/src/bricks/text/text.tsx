@@ -3,7 +3,7 @@ import type { Brick, BrickProps } from '#/bricks/bricks'
 export const TextComponent: React.FC<BrickProps> = ({ onResult }) => {
    return (
       <textarea
-         className="textarea font-mono w-full h-72x"
+         className="textarea font-mono w-full h-72"
          name="txt"
          id="text-txt"
          onChange={(e) => {
