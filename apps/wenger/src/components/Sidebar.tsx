@@ -5,13 +5,13 @@ export default function Sidebar() {
    return (
       <aside className="border-b border-white/5 bg-white/[0.02] px-4 py-2 md:sticky md:top-14 md:h-[calc(100dvh-3.5rem)] md:w-60 md:shrink-0 md:border-r md:border-b-0 md:py-6">
          <nav aria-label="Main">
-            <ul className="flex gap-1 md:flex-col">
+            <ul className="-mx-4 flex gap-1 overflow-x-auto px-4 md:mx-0 md:flex-col md:overflow-visible md:px-0">
                {entryBricks.map((brick) => (
-                  <li key={brick.id}>
+                  <li key={brick.id} className="shrink-0">
                      <Link
                         to="/b/$"
                         params={{ _splat: brick.id }}
-                        className="btn btn-sm w-full justify-start"
+                        className="btn btn-sm w-full justify-start whitespace-nowrap"
                         activeProps={{ className: 'btn-soft btn-accent' }}
                         inactiveProps={{ className: 'btn-ghost' }}
                      >

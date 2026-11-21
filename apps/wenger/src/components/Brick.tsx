@@ -18,11 +18,11 @@ export const BrickComponent: React.FC<BrickComponentProps> = ({
 }) => {
    const Component = brick.component
    return (
-      <div className="card bg-base-100 w-4xl shadow-sm border border-upset-tomato-900">
-         <div className="card-body">
+      <div className="card bg-base-100 w-full max-w-4xl shadow-sm border border-upset-tomato-900">
+         <div className="card-body p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-2">
-               <h2 className="card-title">{brick.name}</h2>
-               <div className="flex gap-1">
+               <h2 className="card-title min-w-0 truncate">{brick.name}</h2>
+               <div className="flex shrink-0 gap-1">
                   <CopyButton text={result} label={`Copy ${brick.name} result`} />
                   {onDelete && (
                      <button

@@ -72,7 +72,7 @@ export default function Canvas({ chain, onChainChange }: CanvasProps) {
    }
    const deleteLastBrick = () => onChainChange(chain.slice(0, -1))
    return (
-      <section className="flex flex-col gap-4 p-6">
+      <section className="flex flex-col gap-4 p-4 sm:p-6">
          {chain.map((brick, idx) => (
             <BrickComponent
                // biome-ignore lint/suspicious/noArrayIndexKey: bricks are only appended or removed from the end, so a position keeps its brick; the id makes one swapped in through the URL start fresh
@@ -86,7 +86,7 @@ export default function Canvas({ chain, onChainChange }: CanvasProps) {
             />
          ))}
          {/* Same width as a brick card so the button sits centered under it */}
-         <div className="flex w-4xl justify-center">
+         <div className="flex w-full max-w-4xl justify-center">
             <div ref={menuRef} className="relative">
                <button
                   type="button"
